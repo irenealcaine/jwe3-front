@@ -19,7 +19,12 @@ const DinosPage = () => {
       {console.log(dinos)}
       {dinos.map((dino) => (
         <Link key={dino.id} to={`/dinosaurs/${dino.slug}`}>
-          {dino.name}
+          <h2>{dino.name}</h2>
+          <img src={`https://jwe3-api.up.railway.app${dino.image}`} />
+          <p>{dino.name}</p>
+          <p>{dino.era}</p>
+          <p>{dino.diet}</p>
+          <p>{dino.description}</p>
         </Link>
       ))}
     </div>
