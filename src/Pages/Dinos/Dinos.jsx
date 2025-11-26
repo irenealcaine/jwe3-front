@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const DinosPage = () => {
@@ -13,10 +13,10 @@ const DinosPage = () => {
     fetchDinos();
   }, []);
 
-  const truncateText = (text, maxLength = 150) => {
-    if (!text) return "No description available";
-    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-  };
+  // const truncateText = (text, maxLength = 150) => {
+  //   if (!text) return "No description available";
+  //   return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8 px-4">
@@ -41,7 +41,7 @@ const DinosPage = () => {
         )}
 
         {/* Dinosaurs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
           {dinos.map((dino) => (
             <Link 
               key={dino.id} 
@@ -63,43 +63,31 @@ const DinosPage = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-2">
                 {/* Title */}
                 <h2 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
                   {dino.name}
                 </h2>
 
                 {/* Diet Badge */}
-                <div className="mb-3">
-                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                    dino.diet && dino.diet.includes('Carnivore') 
+                <div className="mb-0s">
+                  {dino.diet.map((dietType, index) => (
+
+                  <span key={index} className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                    dietType.includes('Carnivore') 
                       ? 'bg-red-900 text-red-200' 
-                      : dino.diet && dino.diet.includes('Herbivore')
+                      : dietType.includes('Herbivore')
                       ? 'bg-green-900 text-green-200'
                       : 'bg-blue-900 text-blue-200'
                   }`}>
-                    {Array.isArray(dino.diet) ? dino.diet.join(', ') : dino.diet || 'Unknown Diet'}
+                    {dietType || 'Unknown Diet'}
                   </span>
+                  ))}
                 </div>
 
-                {/* Description */}
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {truncateText(dino.description)}
-                </p>
+                
 
-                {/* Stats */}
-                <div className="mt-4 pt-4 border-t border-gray-600 flex justify-between text-xs text-gray-400">
-                  <span>Height: {dino.height || 'N/A'} m</span>
-                  <span>Weight: {dino.weight || 'N/A'} kg</span>
-                </div>
-
-                {/* Hover indicator */}
-                <div className="mt-4 flex items-center text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-sm">Learn more</span>
-                  <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
+                
               </div>
             </Link>
           ))}
