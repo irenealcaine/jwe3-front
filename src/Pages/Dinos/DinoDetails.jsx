@@ -43,26 +43,59 @@ const DinoDetailsPage = () => {
       <div className="space-y-4">
         {[
           {
-            label: "Agua",
+            label: "Water",
             value: env.water,
             color: "from-blue-500 to-cyan-500",
           },
           {
-            label: "Bosque",
+            label: "Forest",
             value: env.forest,
             color: "from-green-500 to-emerald-500",
           },
           {
-            label: "Espacio abierto",
+            label: "Open Space",
             value: env.open_space,
             color: "from-yellow-500 to-amber-500",
           },
           {
-            label: "Presas",
-            value: env.prey,
-            color: "from-red-500 to-pink-500",
+            label: "Sand",
+            value: env.sand,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Rock",
+            value: env.rock,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Tall leaf",
+            value: env.tall_leaf,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Ground leaf",
+            value: env.ground_leaf,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Grund fruit",
+            value: env.ground_fruit,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Tall fruit",
+            value: env.tall_fruit,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Ground fiber",
+            value: env.ground_fiber,
+            color: "from-yellow-500 to-amber-500",
+          },{
+            label: "Tall fiber",
+            value: env.tall_fiber,
+            color: "from-yellow-500 to-amber-500",
           },
-        ].map((item, idx) => (
+          // {
+          //   label: "Presas",
+          //   value: env.prey,
+          //   color: "from-red-500 to-pink-500",
+          // },
+        ].filter(item => item.value !== undefined && item.value !== null).map((item, idx) => (
           <div key={idx}>
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm font-medium text-gray-300">
@@ -71,7 +104,7 @@ const DinoDetailsPage = () => {
               <span
                 className={`text-lg font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
               >
-                {item.value}%
+                {item.value} %
               </span>
             </div>
             <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur">
