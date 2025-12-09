@@ -19,7 +19,7 @@ const DinosPage = () => {
   // };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8 px-4">
+    <div className="bg-gray-900 min-h-screen text-white p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
@@ -41,36 +41,22 @@ const DinosPage = () => {
         )}
 
         {/* Dinosaurs Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
           {dinos.map((dino) => (
             <Link 
               key={dino.id} 
               to={`/dinosaurs/${dino.slug}`}
-              className="group bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-600 hover:shadow-2xl hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2"
+              className="group bg-gray-800 rounded-sm overflow-hidden transition-all duration-300 transform "
             >
               {/* Image Container */}
-              <div className="relative h-48 overflow-hidden bg-gray-700">
+              <div className="relative overflow-hidden bg-gray-700">
                 <img 
                   src={`https://jwe3-api.up.railway.app${dino.image}`} 
                   alt={dino.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute top-3 right-3">
-                  <span className="bg-black bg-opacity-60 text-white px-2 py-1 rounded-full text-xs font-medium">
-                    {dino.era || "Unknown Era"}
-                  </span>
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-2">
-                {/* Title */}
-                <h2 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                  {dino.name}
-                </h2>
-
-                {/* Diet Badge */}
-                <div className="mb-0s">
+                <div className="absolute top-1 right-1 space-x-1">
                   {dino.diet.map((dietType, index) => (
 
                   <span key={index} className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
@@ -80,13 +66,25 @@ const DinosPage = () => {
                       ? 'bg-green-900 text-green-200'
                       : 'bg-blue-900 text-blue-200'
                   }`}>
-                    {dietType || 'Unknown Diet'}
+                    {
+                    dietType.includes('Carnivore') 
+                      ? '🥩' 
+                      : dietType.includes('Herbivore')
+                      ? '🌿'
+                      : '🐟'}
                   </span>
                   ))}
                 </div>
+              </div>
 
-                
+              {/* Content */}
+              <div className="p-2">
+                {/* Title */}
+                <h2 className="md:text-lg font-bold group-hover:text-blue-400 transition-colors">
+                  {dino.name}
+                </h2>
 
+              
                 
               </div>
             </Link>

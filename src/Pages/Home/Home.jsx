@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="header">
+    <div className="bg-gray-900 min-h-screen text-white p-8">
       <Link to={"/dinosaurs"} className="title">
-        dinos
+        <h1 className="">Dinosaurs</h1>
       </Link>
     </div>
   );
