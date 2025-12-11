@@ -246,15 +246,15 @@ const DinoDetailsPage = () => {
                 </div>
               )}
 
-              {/* Paleología */}
-              {dino.paleology && (
+              {/* Paleoecología */}
+              {dino.palaeoecology && (
                 <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
                   <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                     <span className="w-1 h-6 bg-gradient-to-b from-indigo-400 to-purple-400 rounded"></span>
-                    Paleoecology
+                    Palaeoecology
                   </h2>
                   <p className="text-gray-300 leading-relaxed text-sm">
-                    {dino.paleology}
+                    {dino.palaeoecology}
                   </p>
                 </div>
               )}
