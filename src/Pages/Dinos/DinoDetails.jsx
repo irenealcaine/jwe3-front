@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import dinoPlaceholder from "./../../assets/dino.webp";
 
 const DinoDetailsPage = () => {
@@ -23,11 +23,11 @@ const DinoDetailsPage = () => {
   ) => {
     if (!items || items.length === 0) return null;
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 justify-center">
         {items.map((item, index) => (
           <span
             key={index}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${colorClass} hover:scale-105 transition-transform`}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${colorClass}`}
           >
             {item}
           </span>
@@ -61,31 +61,38 @@ const DinoDetailsPage = () => {
             label: "Sand",
             value: env.sand,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Rock",
             value: env.rock,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Tall leaf",
             value: env.tall_leaf,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Ground leaf",
             value: env.ground_leaf,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Grund fruit",
             value: env.ground_fruit,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Tall fruit",
             value: env.tall_fruit,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Ground fiber",
             value: env.ground_fiber,
             color: "from-yellow-500 to-amber-500",
-          },{
+          },
+          {
             label: "Tall fiber",
             value: env.tall_fiber,
             color: "from-yellow-500 to-amber-500",
@@ -95,26 +102,28 @@ const DinoDetailsPage = () => {
           //   value: env.prey,
           //   color: "from-red-500 to-pink-500",
           // },
-        ].filter(item => item.value !== undefined && item.value !== null).map((item, idx) => (
-          <div key={idx}>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-300">
-                {item.label}
-              </span>
-              <span
-                className={`text-lg font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
-              >
-                {item.value} %
-              </span>
+        ]
+          .filter((item) => item.value !== undefined && item.value !== null)
+          .map((item, idx) => (
+            <div key={idx}>
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-medium text-gray-300">
+                  {item.label}
+                </span>
+                <span
+                  className={`text-lg font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
+                >
+                  {item.value} %
+                </span>
+              </div>
+              <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur">
+                <div
+                  className={`h-full bg-gradient-to-r ${item.color} transition-all duration-500`}
+                  style={{ width: `${item.value}%` }}
+                />
+              </div>
             </div>
-            <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur">
-              <div
-                className={`h-full bg-gradient-to-r ${item.color} transition-all duration-500`}
-                style={{ width: `${item.value}%` }}
-              />
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     );
   };
@@ -127,17 +136,17 @@ const DinoDetailsPage = () => {
         <div>
           <h4 className="font-semibold text-green-400 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-400"></span>
-            Le encanta compartir con
+            Likes
           </h4>
           {renderBadges(
             cohab.likes,
             "bg-green-500/20 text-green-300 border border-green-500/50"
           )}
         </div>
-        <div className="border-t border-gray-700/50 pt-4">
+        <div className="">
           <h4 className="font-semibold text-red-400 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-400"></span>
-            No tolera
+            Dislikes
           </h4>
           {renderBadges(
             cohab.dislikes,
@@ -150,9 +159,9 @@ const DinoDetailsPage = () => {
 
   return (
     <div className="bg-gray-900 min-h-screen text-white">
-
       <div className="relative z-10 py-12 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
+          <Link to="/dinosaurs">⬅️</Link>
           <div className="flex justify-between flex-col md:flex-row">
             <div className="text-center mb-12">
               <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
@@ -160,16 +169,28 @@ const DinoDetailsPage = () => {
               </h1>
               {dino.era && (
                 <p className="text-gray-400 text-lg">
-                  Era: {dino.era}
+                  {dino.era} {dino.territory == "land" && "dinosaur"}{" "}
+                  {dino.territory == "water" && "acuatic reptile"}{" "}
+                  {dino.territory == "sky" && "flying reptile"}
                 </p>
               )}
-              {renderBadges(
-                dino.diet,
-                "bg-red-500/20 text-red-300 border border-red-500/50"
+
+              {/* Tipo de Feeder */}
+              {dino.feeder && dino.feeder.length > 0 && (
+                <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
+                  {renderBadges(
+                    dino.diet,
+                    "bg-red-500/20 text-red-300 border border-red-500/50"
+                  )}
+                  {renderBadges(
+                    dino.feeder,
+                    "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
+                  )}
+                </div>
               )}
 
               <p className="text-gray-300 font-semibold text-sm">
-                {dino.game!="Base game" && dino.game}
+                {dino.game != "Base game" && dino.game}
               </p>
             </div>
             <div className="">
@@ -189,33 +210,30 @@ const DinoDetailsPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* COLUMNA IZQUIERDA - Imagen y textos largos */}
             <div className="space-y-4">
-
-
-              
-
               {/* Clasificación */}
               {(dino.family || dino.genus || dino.territory) && (
                 <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
                   <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
                     <span className="w-1 h-6 bg-gradient-to-b from-amber-400 to-orange-400 rounded"></span>
-                    Clasificación
+                    Clasification
                   </h2>
                   <div className="space-y-2 text-sm">
                     {[
-                      { label: "Familia", value: dino.family },
-                      { label: "Género", value: dino.genus },
-                      { label: "Territorio", value: dino.territory },
-                    ].filter(item => item.value).map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex justify-between p-2 bg-gray-800/50 rounded-lg"
-                      >
-                        <span className="text-gray-400">{item.label}</span>
-                        <span className="text-white font-semibold">
-                          {item.value}
-                        </span>
-                      </div>
-                    ))}
+                      { label: "Family", value: dino.family },
+                      { label: "Genus", value: dino.genus },
+                    ]
+                      .filter((item) => item.value)
+                      .map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="flex justify-between p-2 bg-gray-800/50 rounded-lg"
+                        >
+                          <span className="text-gray-400">{item.label}</span>
+                          <span className="text-white font-semibold">
+                            {item.value}
+                          </span>
+                        </div>
+                      ))}
                   </div>
                 </div>
               )}
@@ -263,57 +281,44 @@ const DinoDetailsPage = () => {
             {/* COLUMNA DERECHA - Datos y estadísticas */}
             <div className="space-y-4">
               {/* Estadísticas */}
-              {(dino.height || dino.length || dino.weight || dino.security_rating) && (
+              {(dino.height ||
+                dino.length ||
+                dino.weight ||
+                dino.security_rating) && (
                 <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
                   <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                     <span className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-blue-400 rounded"></span>
-                    Estadísticas
+                    Stats
                   </h2>
                   <div className="flex flex-col md:flex-row gap-2">
                     {[
-                      { label: "Altura", value: dino.height, unit: "m" },
-                      { label: "Largo", value: dino.length, unit: "m" },
-                      { label: "Peso", value: dino.weight, unit: "kg" },
+                      { label: "Height", value: dino.height, unit: "m" },
+                      { label: "Large", value: dino.length, unit: "m" },
+                      { label: "Weight", value: dino.weight, unit: "kg" },
                       // {
                       //   label: "Seguridad",
                       //   value: dino.security_rating,
                       //   unit: "",
                       // },
-                    ].filter(stat => stat.value).map((stat, idx) => (
-                      <div
-                        key={idx}
-                        className="flex justify-between gap-4 p-2 bg-gray-800/50 rounded-xl border border-gray-700/30 "
-                      >
-                        <span className="text-gray-400 text-sm font-medium">
-                          {stat.label}
-                        </span>
-                        <span className="text-2xl font-bold text-white">
-                          {stat.value}{" "}
-                          <span className="text-sm text-gray-500">
-                            {stat.unit}
+                    ]
+                      .filter((stat) => stat.value)
+                      .map((stat, idx) => (
+                        <div
+                          key={idx}
+                          className="flex justify-between gap-4 p-2 bg-gray-800/50 rounded-xl border border-gray-700/30 "
+                        >
+                          <span className="text-gray-400 text-sm font-medium">
+                            {stat.label}
                           </span>
-                        </span>
-                      </div>
-                    ))}
+                          <span className="text-2xl font-bold text-white">
+                            {stat.value}{" "}
+                            <span className="text-sm text-gray-500">
+                              {stat.unit}
+                            </span>
+                          </span>
+                        </div>
+                      ))}
                   </div>
-                </div>
-              )}
-
-
-
-
-
-              {/* Tipo de Feeder */}
-              {dino.feeder && dino.feeder.length > 0 && (
-                <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
-                  <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <span className="w-1 h-6 bg-gradient-to-b from-yellow-400 to-amber-400 rounded"></span>
-                    Tipo de Alimentación
-                  </h2>
-                  {renderBadges(
-                    dino.feeder,
-                    "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
-                  )}
                 </div>
               )}
 
@@ -330,54 +335,43 @@ const DinoDetailsPage = () => {
                   )}
                 </div>
               )}
-              {((dino.environment && dino.environment.length > 0)) && (
+              {dino.environment && dino.environment.length > 0 && (
                 <div className="">
                   {dino.environment && dino.environment.length > 0 && (
                     <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
                       <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                         <span className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-blue-400 rounded"></span>
-                        Requerimientos Ambientales
+                        Environmental requirements
                       </h2>
                       {renderEnvironment(dino.environment)}
                     </div>
                   )}
-
-
                 </div>
               )}
 
-              {((dino.cohabitation && dino.cohabitation.length > 0)) && (
+              {dino.cohabitation && dino.cohabitation.length > 0 && (
                 <div className="">
-
                   {dino.cohabitation && dino.cohabitation.length > 0 && (
                     <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
                       <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                         <span className="w-1 h-6 bg-gradient-to-b from-purple-400 to-pink-400 rounded"></span>
-                        Convivencia
+                        Cohabitation
                       </h2>
-                      {renderCohabitation(dino.cohabitation)}
 
-                      <h3 className="text-lg font-bold text-white my-3 flex items-center gap-3">
-                        <span className="w-1 h-4 bg-gradient-to-b from-green-400 to-emerald-400 rounded"></span>
-                        Población Mínima
+                      <h3 className="text-lg font-bold text-white my-3 flex items-center gap-3 border-b border-gray-700/50">
+                        Minimum poblation: {dino.minimum_population}
                       </h3>
-                      <p className="text-4xl font-bold text-white">
-                        {dino.minimum_population}
-                      </p>
+                      {renderCohabitation(dino.cohabitation)}
                     </div>
                   )}
                 </div>
               )}
-
             </div>
           </div>
 
           {/* Sección inferior - A ancho completo */}
-
         </div>
       </div>
-
-
     </div>
   );
 };
