@@ -46,7 +46,7 @@ const DinoDetailsPage = () => {
         {items.map((item, index) => (
           <span
             key={index}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${colorClass}`}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm font-mono uppercase ${colorClass}`}
           >
             {item}
           </span>
@@ -122,11 +122,11 @@ const DinoDetailsPage = () => {
           .map((item, idx) => (
             <div key={idx}>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium text-gray-300">
+                <span className="text-sm font-medium text-gray-300 font-mono">
                   {item.label}
                 </span>
                 <span
-                  className={`text-lg font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
+                  className={`text-lg font-bold font-mono bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
                 >
                   {item.value} %
                 </span>
@@ -219,10 +219,12 @@ const DinoDetailsPage = () => {
                       SPECIMEN DATA
                     </span>
                   </div>
-                  <h1 className="text-4xl md:text-6xl font-black mb-4">
-                    <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent drop-shadow-sm">
+                  <h1 className="text-4xl md:text-6xl font-black mb-4 font-mono">
+                    <span className="text-cyan-400">[</span>
+                    <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
                       {dino.name || "LOADING..."}
                     </span>
+                    <span className="text-cyan-400">]</span>
                   </h1>
                   {dino.era && (
                     <p className="text-gray-300 text-lg mb-2 font-mono">
