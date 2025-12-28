@@ -79,42 +79,42 @@ const DinoDetailsPage = () => {
           {
             label: "Sand",
             value: env.sand,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-orange-500 to-red-500",
           },
           {
             label: "Rock",
             value: env.rock,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-gray-500 to-slate-500",
           },
           {
             label: "Tall leaf",
             value: env.tall_leaf,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-lime-500 to-green-500",
           },
           {
             label: "Ground leaf",
             value: env.ground_leaf,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-emerald-500 to-teal-500",
           },
           {
             label: "Grund fruit",
             value: env.ground_fruit,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-red-500 to-pink-500",
           },
           {
             label: "Tall fruit",
             value: env.tall_fruit,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-purple-500 to-violet-500",
           },
           {
             label: "Ground fiber",
             value: env.ground_fiber,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-amber-600 to-orange-600",
           },
           {
             label: "Tall fiber",
             value: env.tall_fiber,
-            color: "from-yellow-500 to-amber-500",
+            color: "from-indigo-500 to-blue-600",
           }
 
         ]
