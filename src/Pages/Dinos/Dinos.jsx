@@ -8,20 +8,17 @@ const DinosPage = () => {
     async function fetchDinos() {
       const res = await fetch(`https://jwe3-api.up.railway.app/api/dinosaurs`);
       const data = await res.json();
-      setDinos(data);
+      // Sort dinosaurs alphabetically by name
+      const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+      setDinos(sortedData);
     }
     fetchDinos();
   }, []);
 
-  // const truncateText = (text, maxLength = 150) => {
-  //   if (!text) return "No description available";
-  //   return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-  // };
-
   return (
     <div className="bg-gray-900 min-h-screen text-white p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
@@ -43,15 +40,15 @@ const DinosPage = () => {
         {/* Dinosaurs Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
           {dinos.map((dino) => (
-            <Link 
-              key={dino.id} 
+            <Link
+              key={dino.id}
               to={`/dinosaurs/${dino.slug}`}
               className="group bg-gray-800 rounded-sm overflow-hidden transition-all duration-300 transform "
             >
               {/* Image Container */}
               <div className="relative overflow-hidden bg-gray-700">
-                <img 
-                  src={`https://jwe3-api.up.railway.app${dino.image}`} 
+                <img
+                  src={`https://jwe3-api.up.railway.app${dino.image}`}
                   alt={dino.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -59,20 +56,27 @@ const DinosPage = () => {
                 <div className="absolute top-1 right-1 space-x-1">
                   {dino.diet.map((dietType, index) => (
 
-                  <span key={index} className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                    dietType.includes('Carnivore') 
-                      ? 'bg-red-900 text-red-200' 
+                    <span key={index} className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${dietType.includes('Carnivore')
+                      ? 'bg-red-900 text-red-200'
                       : dietType.includes('Herbivore')
-                      ? 'bg-green-900 text-green-200'
-                      : 'bg-blue-900 text-blue-200'
-                  }`}>
-                    {
-                    dietType.includes('Carnivore') 
-                      ? '🥩' 
-                      : dietType.includes('Herbivore')
-                      ? '🌿'
-                      : '🐟'}
-                  </span>
+                        ? 'bg-green-900 text-green-200'
+                        : dietType.includes('Piscivore')
+                          ? 'bg-blue-900 text-blue-200'
+                          : dietType.includes('Omnivore')
+                            ? 'bg-purple-900 text-purple-200'
+                            : 'bg-gray-900 text-gray-200'
+                      }`}>
+                      {
+                        dietType.includes('Carnivore')
+                          ? '🥩'
+                          : dietType.includes('Herbivore')
+                            ? '🌿'
+                            : dietType.includes('Piscivore')
+                              ? '🐟'
+                              : dietType.includes('Omnivore')
+                                ? '🍖'
+                                : '❓'}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -84,8 +88,8 @@ const DinosPage = () => {
                   {dino.name}
                 </h2>
 
-              
-                
+
+
               </div>
             </Link>
           ))}
