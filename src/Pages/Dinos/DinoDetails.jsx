@@ -229,8 +229,8 @@ const DinoDetailsPage = () => {
                   {dino.era && (
                     <p className="text-gray-300 text-lg mb-2">
                       <span className="text-cyan-400">[</span>
-                      {dino.era} {dino.habitat === "Terrestrial" && "DINOSAUR"}{" "}
-                      {dino.habitat === "Aquatic" && "AQUATIC REPTILE"}{" "}
+                      {dino.era} {dino.habitat === "Terrestrial" && "DINOSAUR"}
+                      {dino.habitat === "Aquatic" && "AQUATIC REPTILE"}
                       {dino.habitat === "Aerial" && "FLYING REPTILE"}
                       <span className="text-cyan-400">]</span>
                     </p>
