@@ -33,6 +33,17 @@ const DinosPage = () => {
       <div className="relative z-10 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
 
+          {/* HUD Navigation */}
+          <div className="mb-8">
+            <Link
+              to="/"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-400/50 rounded-lg hover:border-cyan-300 transition-all duration-300 text-cyan-300 hover:text-cyan-100 backdrop-blur-sm hover:shadow-lg hover:shadow-cyan-500/20"
+            >
+              <span className="mr-2">←</span>
+              <span className="text-sm font-mono">BACK TO HOME</span>
+            </Link>
+          </div>
+
           {/* Gaming Header */}
           <div className="text-center mb-12">
             <div className="relative inline-block">
