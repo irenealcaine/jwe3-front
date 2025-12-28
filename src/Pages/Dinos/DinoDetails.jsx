@@ -96,12 +96,8 @@ const DinoDetailsPage = () => {
             label: "Tall fiber",
             value: env.tall_fiber,
             color: "from-yellow-500 to-amber-500",
-          },
-          // {
-          //   label: "Presas",
-          //   value: env.prey,
-          //   color: "from-red-500 to-pink-500",
-          // },
+          }
+
         ]
           .filter((item) => item.value !== undefined && item.value !== null)
           .map((item, idx) => (
@@ -133,26 +129,30 @@ const DinoDetailsPage = () => {
     const cohab = cohabitation[0];
     return (
       <div className="space-y-4">
-        <div>
-          <h4 className="font-semibold text-green-400 mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400"></span>
-            Likes
-          </h4>
-          {renderBadges(
-            cohab.likes,
-            "bg-green-500/20 text-green-300 border border-green-500/50"
-          )}
-        </div>
-        <div className="">
-          <h4 className="font-semibold text-red-400 mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-400"></span>
-            Dislikes
-          </h4>
-          {renderBadges(
-            cohab.dislikes,
-            "bg-red-500/20 text-red-300 border border-red-500/50"
-          )}
-        </div>
+        {cohab.likes &&
+          <div>
+            <p className="font-semibold text-green-400 mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400"></span>
+              Likes
+            </p>
+            {renderBadges(
+              cohab.likes,
+              "bg-green-500/20 text-green-300 border border-green-500/50"
+            )}
+          </div>
+        }
+        {cohab.dislikes &&
+          <div className="">
+            <p className="font-semibold text-red-400 mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-red-400"></span>
+              Dislikes
+            </p>
+            {renderBadges(
+              cohab.dislikes,
+              "bg-red-500/20 text-red-300 border border-red-500/50"
+            )}
+          </div>
+        }
       </div>
     );
   };
@@ -165,13 +165,13 @@ const DinoDetailsPage = () => {
           <div className="flex justify-between flex-col md:flex-row">
             <div className="text-center mb-12">
               <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
-                {dino.name || "Cargando..."}
+                {dino.name || "Loading..."}
               </h1>
               {dino.era && (
                 <p className="text-gray-400 text-lg">
-                  {dino.era} {dino.territory == "land" && "dinosaur"}{" "}
-                  {dino.territory == "water" && "acuatic reptile"}{" "}
-                  {dino.territory == "sky" && "flying reptile"}
+                  {dino.era} {dino.habitat == "Terrestrial" && "dinosaur"}{" "}
+                  {dino.habitat == "Aquatic" && "acuatic reptile"}{" "}
+                  {dino.habitat == "Aerial" && "flying reptile"}
                 </p>
               )}
 
@@ -283,44 +283,38 @@ const DinoDetailsPage = () => {
               {/* Estadísticas */}
               {(dino.height ||
                 dino.length ||
-                dino.weight ||
-                dino.security_rating) && (
-                <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
-                  <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                    <span className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-blue-400 rounded"></span>
-                    Stats
-                  </h2>
-                  <div className="flex flex-col md:flex-row gap-2">
-                    {[
-                      { label: "Height", value: dino.height, unit: "m" },
-                      { label: "Large", value: dino.length, unit: "m" },
-                      { label: "Weight", value: dino.weight, unit: "kg" },
-                      // {
-                      //   label: "Seguridad",
-                      //   value: dino.security_rating,
-                      //   unit: "",
-                      // },
-                    ]
-                      .filter((stat) => stat.value)
-                      .map((stat, idx) => (
-                        <div
-                          key={idx}
-                          className="flex justify-between gap-4 p-2 bg-gray-800/50 rounded-xl border border-gray-700/30 "
-                        >
-                          <span className="text-gray-400 text-sm font-medium">
-                            {stat.label}
-                          </span>
-                          <span className="text-2xl font-bold text-white">
-                            {stat.value}{" "}
-                            <span className="text-sm text-gray-500">
-                              {stat.unit}
+                dino.weight) && (
+                  <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
+                    <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                      <span className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-blue-400 rounded"></span>
+                      Stats
+                    </h2>
+                    <div className="flex flex-col md:flex-row gap-2">
+                      {[
+                        { label: "Height", value: dino.height, unit: "m" },
+                        { label: "Large", value: dino.length, unit: "m" },
+                        { label: "Weight", value: dino.weight, unit: "kg" },
+                      ]
+                        .filter((stat) => stat.value)
+                        .map((stat, idx) => (
+                          <div
+                            key={idx}
+                            className="flex justify-between gap-4 p-2 bg-gray-800/50 rounded-xl border border-gray-700/30 "
+                          >
+                            <span className="text-gray-400 text-sm font-medium">
+                              {stat.label}
                             </span>
-                          </span>
-                        </div>
-                      ))}
+                            <span className="text-2xl font-bold text-white">
+                              {stat.value}{" "}
+                              <span className="text-sm text-gray-500">
+                                {stat.unit}
+                              </span>
+                            </span>
+                          </div>
+                        ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
               {/* Dig Sites */}
               {dino.dig_sites && dino.dig_sites.length > 0 && (
@@ -357,10 +351,17 @@ const DinoDetailsPage = () => {
                         <span className="w-1 h-6 bg-gradient-to-b from-purple-400 to-pink-400 rounded"></span>
                         Cohabitation
                       </h2>
+                      {dino.minimum_population &&
+                        <p className="text-lg text-white mt-3 flex items-center gap-3">
+                          Minimum poblation: <span className="font-bold">{dino.minimum_population}</span>
+                        </p>
+                      }
+                      {dino.security_rating &&
+                        <p className="text-lg text-white pb-3 mb-3 flex items-center gap-3 border-b border-gray-700/50">
+                          Security rating: <span className="font-bold">{dino.security_rating}</span>
+                        </p>
+                      }
 
-                      <h3 className="text-lg font-bold text-white my-3 flex items-center gap-3 border-b border-gray-700/50">
-                        Minimum poblation: {dino.minimum_population}
-                      </h3>
                       {renderCohabitation(dino.cohabitation)}
                     </div>
                   )}
