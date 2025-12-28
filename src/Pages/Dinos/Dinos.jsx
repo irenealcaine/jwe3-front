@@ -16,92 +16,146 @@ const DinosPage = () => {
   }, []);
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-black min-h-screen text-white relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 opacity-10">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-3/4 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-green-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-orange-500/20 rounded-full blur-2xl animate-pulse delay-700"></div>
+      </div>
 
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-            Dinosaurs
-          </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Discover the magnificent creatures that once ruled the Earth
-          </p>
-        </div>
+      {/* Scanline Effect */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent animate-pulse"></div>
+      </div>
 
-        {/* Loading State */}
-        {dinos.length === 0 && (
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-            <p className="text-gray-300 mt-4">Loading dinosaurs...</p>
+      <div className="relative z-10 p-4 md:p-8">
+        <div className="max-w-7xl mx-auto">
+
+          {/* Gaming Header */}
+          <div className="text-center mb-12">
+            <div className="relative inline-block">
+              {/* Header HUD Frame */}
+              <div className="absolute -inset-4 border-2 border-cyan-400/30 rounded-2xl">
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-cyan-400 rounded-tl-2xl"></div>
+                <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-cyan-400 rounded-tr-2xl"></div>
+                <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-cyan-400 rounded-bl-2xl"></div>
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-cyan-400 rounded-br-2xl"></div>
+              </div>
+
+              <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl p-8 rounded-2xl border border-cyan-500/20">
+                <span className="inline-block px-4 py-2 bg-cyan-500/20 border border-cyan-400/50 rounded-full text-cyan-300 text-sm font-mono mb-6">
+                  SPECIMEN DATABASE
+                </span>
+                <h1 className="text-4xl md:text-6xl font-black mb-4">
+                  <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent drop-shadow-sm font-mono">
+                    [DINOSAURS]
+                  </span>
+                </h1>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
+                  <span className="text-cyan-400">&gt;</span> Discover the magnificent creatures that once ruled the Earth
+                </p>
+              </div>
+            </div>
           </div>
-        )}
 
-        {/* Dinosaurs Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-          {dinos.map((dino) => (
-            <Link
-              key={dino.id}
-              to={`/dinosaurs/${dino.slug}`}
-              className="group bg-gray-800 rounded-sm overflow-hidden transition-all duration-300 transform "
-            >
-              {/* Image Container */}
-              <div className="relative overflow-hidden bg-gray-700">
-                <img
-                  src={`https://jwe3-api.up.railway.app${dino.image}`}
-                  alt={dino.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
+          {/* HUD Loading State */}
+          {dinos.length === 0 && (
+            <div className="text-center">
+              <div className="relative inline-block">
+                <div className="w-16 h-16 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
+                <div className="absolute inset-2 w-12 h-12 border-2 border-purple-400/20 border-r-purple-400 rounded-full animate-spin animate-reverse"></div>
+              </div>
+              <p className="text-cyan-300 mt-6 font-mono text-lg">
+                <span className="text-cyan-400">[</span>LOADING SPECIMENS<span className="text-cyan-400">]</span>
+                <span className="animate-pulse">...</span>
+              </p>
+            </div>
+          )}
 
-                <div className="absolute top-1 right-1 space-x-1">
-                  {dino.diet.map((dietType, index) => (
+          {/* HUD Specimen Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {dinos.map((dino) => (
+              <Link
+                key={dino.id}
+                to={`/dinosaurs/${dino.slug}`}
+                className="group relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl rounded-xl overflow-hidden transition-all duration-300 transform hover:scale-105 border border-gray-700/50 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20"
+              >
+                {/* HUD Corner Elements */}
+                <div className="absolute top-1 left-1 w-3 h-3 border-t border-l border-cyan-400/60 rounded-tl-lg z-10"></div>
+                <div className="absolute top-1 right-1 w-3 h-3 border-t border-r border-cyan-400/60 rounded-tr-lg z-10"></div>
+                <div className="absolute bottom-1 left-1 w-3 h-3 border-b border-l border-cyan-400/60 rounded-bl-lg z-10"></div>
+                <div className="absolute bottom-1 right-1 w-3 h-3 border-b border-r border-cyan-400/60 rounded-br-lg z-10"></div>
 
-                    <span key={index} className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${dietType.includes('Carnivore')
-                      ? 'bg-red-900 text-red-200'
-                      : dietType.includes('Herbivore')
-                        ? 'bg-green-900 text-green-200'
-                        : dietType.includes('Piscivore')
-                          ? 'bg-blue-900 text-blue-200'
-                          : dietType.includes('Omnivore')
-                            ? 'bg-purple-900 text-purple-200'
-                            : 'bg-gray-900 text-gray-200'
-                      }`}>
-                      {
-                        dietType.includes('Carnivore')
-                          ? '🥩'
+                {/* Image Container */}
+                <div className="relative overflow-hidden bg-gray-800/50">
+                  <img
+                    src={`https://jwe3-api.up.railway.app${dino.image}`}
+                    alt={dino.name}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300 filter brightness-110 contrast-110"
+                  />
+
+                  {/* Holographic overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/5 to-transparent group-hover:animate-pulse"></div>
+
+                  {/* Diet Badges */}
+                  <div className="absolute top-2 right-2 space-x-1">
+                    {dino.diet.map((dietType, index) => (
+                      <span
+                        key={index}
+                        className={`inline-block px-2 py-1 rounded-full text-xs font-mono border backdrop-blur-sm ${dietType.includes('Carnivore')
+                          ? 'bg-red-900/60 text-red-200 border-red-500/50'
                           : dietType.includes('Herbivore')
-                            ? '🌿'
+                            ? 'bg-green-900/60 text-green-200 border-green-500/50'
                             : dietType.includes('Piscivore')
-                              ? '🐟'
+                              ? 'bg-blue-900/60 text-blue-200 border-blue-500/50'
                               : dietType.includes('Omnivore')
-                                ? '🍖'
-                                : '❓'}
-                    </span>
-                  ))}
+                                ? 'bg-purple-900/60 text-purple-200 border-purple-500/50'
+                                : 'bg-gray-900/60 text-gray-200 border-gray-500/50'
+                          }`}
+                      >
+                        {
+                          dietType.includes('Carnivore')
+                            ? '🥩'
+                            : dietType.includes('Herbivore')
+                              ? '🌿'
+                              : dietType.includes('Piscivore')
+                                ? '🐟'
+                                : dietType.includes('Omnivore')
+                                  ? '🍖'
+                                  : '❓'
+                        }
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-2">
-                {/* Title */}
-                <h2 className="md:text-lg font-bold group-hover:text-blue-400 transition-colors">
-                  {dino.name}
-                </h2>
-
-
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Footer message */}
-        {dinos.length > 0 && (
-          <div className="text-center mt-16">
-            <p className="text-gray-400">
-              Showing {dinos.length} prehistoric species
-            </p>
+                {/* Content Panel */}
+                <div className="p-4 bg-black/30">
+                  <h2 className="text-base md:text-lg font-bold group-hover:text-cyan-300 transition-colors font-mono">
+                    <span className="text-cyan-400/60">&gt; </span>{dino.name}
+                  </h2>
+                </div>
+              </Link>
+            ))}
           </div>
-        )}
+
+          {/* HUD Footer Stats */}
+          {dinos.length > 0 && (
+            <div className="text-center mt-16">
+              <div className="inline-block bg-gradient-to-r from-gray-900/80 to-black/80 backdrop-blur-xl px-8 py-4 rounded-xl border border-cyan-500/30">
+                <p className="text-cyan-300 font-mono flex items-center gap-3">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  <span className="text-cyan-400">[</span>DATABASE STATUS<span className="text-cyan-400">]</span>
+                  <span className="text-white font-bold">{dinos.length}</span>
+                  <span className="text-gray-300">specimens loaded</span>
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
