@@ -89,7 +89,6 @@ const DinosPage = () => {
                 </h2>
 
 
-
               </div>
             </Link>
           ))}

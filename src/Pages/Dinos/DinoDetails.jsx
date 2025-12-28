@@ -6,6 +6,25 @@ const DinoDetailsPage = () => {
   const [dino, setDino] = useState({});
   const { slug } = useParams();
 
+  // Function to get food requirements from environment
+  const getFoodRequirement = (dino) => {
+    if (!dino.environment || !Array.isArray(dino.environment)) return null;
+
+    const envData = dino.environment[0]; // Get first environment data
+    if (!envData) return null;
+
+    const requirements = [];
+
+    if (envData.prey !== undefined && envData.prey > 0) {
+      requirements.push({ type: 'Prey', amount: envData.prey, icon: '🦴', color: 'text-red-400' });
+    }
+    if (envData.fish !== undefined && envData.fish > 0) {
+      requirements.push({ type: 'Fish', amount: envData.fish, icon: '🐠', color: 'text-blue-400' });
+    }
+
+    return requirements.length > 0 ? requirements : null;
+  };
+
   useEffect(() => {
     async function fetchDinos() {
       const res = await fetch(
@@ -175,19 +194,6 @@ const DinoDetailsPage = () => {
                 </p>
               )}
 
-              {/* Tipo de Feeder */}
-              {dino.feeder && dino.feeder.length > 0 && (
-                <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
-                  {renderBadges(
-                    dino.diet,
-                    "bg-red-500/20 text-red-300 border border-red-500/50"
-                  )}
-                  {renderBadges(
-                    dino.feeder,
-                    "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
-                  )}
-                </div>
-              )}
 
               <p className="text-gray-300 font-semibold text-sm">
                 {dino.game != "Base game" && dino.game}
@@ -315,6 +321,71 @@ const DinoDetailsPage = () => {
                     </div>
                   </div>
                 )}
+
+              {/* Food Requirements */}
+              {(() => {
+                const foodReqs = getFoodRequirement(dino);
+                const hasFoodInfo = foodReqs || (dino.diet && dino.diet.length > 0) || (dino.feeder && dino.feeder.length > 0);
+                return hasFoodInfo && (
+                  <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-700/50">
+                    <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                      <span className="w-1 h-6 bg-gradient-to-b from-yellow-400 to-orange-400 rounded"></span>
+                      Food Requirements
+                    </h2>
+
+                    {/* Diet and Feeder Badges */}
+                    {((dino.diet && dino.diet.length > 0) || (dino.feeder && dino.feeder.length > 0)) && (
+                      <div className="mb-4 space-y-3">
+                        {dino.diet && dino.diet.length > 0 && (
+                          <div>
+                            <p className="text-sm text-gray-400 mb-2">Diet Type:</p>
+                            {renderBadges(
+                              dino.diet,
+                              "bg-red-500/20 text-red-300 border border-red-500/50"
+                            )}
+                          </div>
+                        )}
+                        {dino.feeder && dino.feeder.length > 0 && (
+                          <div>
+                            <p className="text-sm text-gray-400 mb-2">Feeder Type:</p>
+                            {renderBadges(
+                              dino.feeder,
+                              "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Food Amount Requirements */}
+                    {foodReqs && (
+                      <div>
+                        {((dino.diet && dino.diet.length > 0) || (dino.feeder && dino.feeder.length > 0)) && (
+                          <div className="border-t border-gray-700/50 pt-4 mt-4">
+                            <p className="text-sm text-gray-400 mb-3">Amount Required:</p>
+                          </div>
+                        )}
+                        <div className="space-y-3">
+                          {foodReqs.map((req, idx) => (
+                            <div
+                              key={idx}
+                              className="flex justify-between items-center p-3 bg-gray-800/50 rounded-xl border border-gray-700/30"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="text-lg">{req.icon}</span>
+                                <span className="text-gray-300 font-medium">{req.type}</span>
+                              </div>
+                              <span className={`text-xl font-bold ${req.color}`}>
+                                {req.amount}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
 
               {/* Dig Sites */}
               {dino.dig_sites && dino.dig_sites.length > 0 && (
