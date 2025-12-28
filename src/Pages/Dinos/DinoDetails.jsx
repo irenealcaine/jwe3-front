@@ -177,7 +177,7 @@ const DinoDetailsPage = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen text-white relative overflow-hidden">
+    <div className="bg-black min-h-screen text-white relative overflow-hidden font-mono">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 opacity-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -199,7 +199,7 @@ const DinoDetailsPage = () => {
               className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-400/50 rounded-lg hover:border-cyan-300 transition-all duration-300 text-cyan-300 hover:text-cyan-100 backdrop-blur-sm"
             >
               <span className="mr-2">←</span>
-              <span className="text-sm font-mono">BACK TO DATABASE</span>
+              <span className="text-sm">BACK TO DATABASE</span>
             </Link>
           </div>
 
@@ -215,11 +215,11 @@ const DinoDetailsPage = () => {
               <div className="flex flex-col lg:flex-row items-center gap-8">
                 <div className="flex-1 text-center lg:text-left">
                   <div className="mb-4">
-                    <span className="inline-block px-3 py-1 bg-cyan-500/20 border border-cyan-400/50 rounded-full text-cyan-300 text-xs font-mono mb-4">
+                    <span className="inline-block px-3 py-1 bg-cyan-500/20 border border-cyan-400/50 rounded-full text-cyan-300 text-xs mb-4">
                       SPECIMEN DATA
                     </span>
                   </div>
-                  <h1 className="text-4xl md:text-6xl font-black mb-4 font-mono">
+                  <h1 className="text-4xl md:text-6xl font-black mb-4">
                     <span className="text-cyan-400">[</span>
                     <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
                       {dino.name || "LOADING..."}
@@ -227,7 +227,7 @@ const DinoDetailsPage = () => {
                     <span className="text-cyan-400">]</span>
                   </h1>
                   {dino.era && (
-                    <p className="text-gray-300 text-lg mb-2 font-mono">
+                    <p className="text-gray-300 text-lg mb-2">
                       <span className="text-cyan-400">[</span>
                       {dino.era} {dino.habitat === "Terrestrial" && "DINOSAUR"}{" "}
                       {dino.habitat === "Aquatic" && "AQUATIC REPTILE"}{" "}
@@ -236,7 +236,7 @@ const DinoDetailsPage = () => {
                     </p>
                   )}
                   {dino.game && dino.game !== "Base game" && (
-                    <p className="text-green-400 font-mono text-sm">
+                    <p className="text-green-400 text-sm">
                       <span className="text-green-500"></span> {dino.game.toUpperCase()}
                     </p>
                   )}
