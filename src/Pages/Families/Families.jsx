@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const FamliesPage = () => {
-  const [families, setFamilies] = useState({});
+  const [families, setFamilies] = useState([]);
 
   useEffect(() => {
     async function fetchFamilies() {
@@ -33,7 +33,6 @@ const FamliesPage = () => {
 
       <div className="relative z-10 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
-
           {/* HUD Navigation */}
           <div className="mb-8">
             <Link
@@ -66,7 +65,8 @@ const FamliesPage = () => {
                   </span>
                 </h1>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
-                  <span className="text-cyan-400">&gt;</span> Explore dinosaur families and their members
+                  <span className="text-cyan-400">&gt;</span> Explore dinosaur
+                  families and their members
                 </p>
               </div>
             </div>
@@ -80,7 +80,8 @@ const FamliesPage = () => {
                 <div className="absolute inset-2 w-12 h-12 border-2 border-purple-400/20 border-r-purple-400 rounded-full animate-spin animate-reverse"></div>
               </div>
               <p className="text-cyan-300 mt-6 font-mono text-lg">
-                <span className="text-cyan-400">[</span>LOADING FAMILIES<span className="text-cyan-400">]</span>
+                <span className="text-cyan-400">[</span>LOADING FAMILIES
+                <span className="text-cyan-400">]</span>
                 <span className="animate-pulse">...</span>
               </p>
             </div>
@@ -135,7 +136,8 @@ const FamliesPage = () => {
                       {/* Content Panel */}
                       <div className="p-4 bg-black/30">
                         <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-300 transition-colors font-mono">
-                          <span className="text-cyan-400/60">&gt; </span>{dinosaur.name}
+                          <span className="text-cyan-400/60">&gt; </span>
+                          {dinosaur.name}
                         </h3>
                       </div>
                     </Link>
@@ -151,8 +153,11 @@ const FamliesPage = () => {
               <div className="inline-block bg-gradient-to-r from-gray-900/80 to-black/80 backdrop-blur-xl px-8 py-4 rounded-xl border border-cyan-500/30">
                 <p className="text-cyan-300 font-mono flex items-center gap-3">
                   <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                  <span className="text-cyan-400">[</span>DATABASE STATUS<span className="text-cyan-400">]</span>
-                  <span className="text-white font-bold">{Object.keys(families).length}</span>
+                  <span className="text-cyan-400">[</span>DATABASE STATUS
+                  <span className="text-cyan-400">]</span>
+                  <span className="text-white font-bold">
+                    {Object.keys(families).length}
+                  </span>
                   <span className="text-gray-300">families loaded</span>
                 </p>
               </div>
