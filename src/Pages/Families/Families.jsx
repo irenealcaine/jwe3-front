@@ -8,9 +8,10 @@ const FamliesPage = () => {
     async function fetchFamilies() {
       const res = await fetch(`https://jwe3-api.up.railway.app/api/families`);
       const data = await res.json();
-    //   const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
-    //   setFamilies(sortedData);
-      setFamilies(data);
+      const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+      setFamilies(sortedData);
+      console.log(sortedData);
+      // setFamilies(data);
     }
     fetchFamilies();
   }, []);
@@ -72,7 +73,7 @@ const FamliesPage = () => {
           </div>
 
           {/* HUD Loading State */}
-          {Object.keys(families).length === 0 && (
+          {families.length === 0 && (
             <div className="text-center">
               <div className="relative inline-block">
                 <div className="w-16 h-16 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
@@ -87,8 +88,8 @@ const FamliesPage = () => {
 
           {/* Family Sections */}
           <div className="space-y-12">
-            {Object.entries(families).map(([familyName, familyData]) => (
-              <div key={familyName} className="relative">
+            {families.map((family) => (
+              <div key={family.name} className="relative">
                 {/* Family Header */}
                 <div className="mb-6">
                   <div className="relative inline-block">
@@ -97,7 +98,7 @@ const FamliesPage = () => {
                       <h2 className="text-2xl md:text-3xl font-black font-mono">
                         <span className="text-purple-400">&gt; </span>
                         <span className="bg-gradient-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent">
-                          {familyName}
+                          {family.name}
                         </span>
                       </h2>
                     </div>
@@ -106,7 +107,7 @@ const FamliesPage = () => {
 
                 {/* Dinosaurs Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {familyData.dinosaurs.map((dinosaur) => (
+                  {family.dinosaurs.map((dinosaur) => (
                     <Link
                       key={dinosaur.slug}
                       to={`/dinosaurs/${dinosaur.slug}`}
