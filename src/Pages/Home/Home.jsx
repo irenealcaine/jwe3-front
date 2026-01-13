@@ -9,6 +9,9 @@ const HomePage = () => {
             <Link to={"/families"} className="title">
         <h1 className="">Families</h1>
       </Link>
+      <Link to={"/dig-sites"} className="title">
+        <h1 className="">Dig sites</h1>
+      </Link>
     </div>
   );
 };
