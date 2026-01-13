@@ -10,11 +10,24 @@ const DigSitesPage = () => {
       const data = await res.json();
       const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
       setSites(sortedData);
-      console.log(sortedData);
+    //   console.log(sortedData);
       // setSites(data);
     }
     fetchSites();
   }, []);
+
+  // Handle scroll to anchor after data loads
+  useEffect(() => {
+    if (sites.length > 0 && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [sites]);
 
   return (
     <div className="bg-black min-h-screen text-white relative overflow-hidden">
@@ -90,7 +103,7 @@ const DigSitesPage = () => {
           {/* Family Sections */}
           <div className="space-y-12">
             {sites.map((site) => (
-              <div key={site.name} className="relative">
+              <div key={site.name} id={site.name.toLowerCase().replace(/\s+/g, '-')} className="relative scroll-mt-24">
                 {/* Family Header */}
                 <div className="mb-6">
                   <div className="relative inline-block">

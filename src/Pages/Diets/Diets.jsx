@@ -9,7 +9,7 @@ const DietsPage = () => {
       const res = await fetch(`https://jwe3-api.up.railway.app/api/diets`);
       const data = await res.json();
       setDiets(data);
-      console.log(data);
+    //   console.log(data);
     }
     fetchDiets();
   }, []);

@@ -10,11 +10,24 @@ const FamliesPage = () => {
       const data = await res.json();
       const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
       setFamilies(sortedData);
-      console.log(sortedData);
+      // console.log(sortedData);
       // setFamilies(data);
     }
     fetchFamilies();
   }, []);
+
+  // Handle scroll to anchor after data loads
+  useEffect(() => {
+    if (families.length > 0 && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [families]);
 
   return (
     <div className="bg-black min-h-screen text-white relative overflow-hidden">
@@ -90,7 +103,7 @@ const FamliesPage = () => {
           {/* Family Sections */}
           <div className="space-y-12">
             {families.map((family) => (
-              <div key={family.name} className="relative">
+              <div key={family.name} id={family.name.toLowerCase().replace(/\s+/g, '-')} className="relative scroll-mt-24">
                 {/* Family Header */}
                 <div className="mb-6">
                   <div className="relative inline-block">

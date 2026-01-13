@@ -9,7 +9,7 @@ const HabitatsPage = () => {
       const res = await fetch(`https://jwe3-api.up.railway.app/api/habitats`);
       const data = await res.json();
       setHabitats(data);
-      console.log(data);
+    //   console.log(data);
     }
     fetchHabitats();
   }, []);

@@ -235,6 +235,17 @@ const DinoDetailsPage = () => {
                       <span className="text-cyan-400">]</span>
                     </p>
                   )}
+                  {dino.habitat && (
+                    <div className="mt-3">
+                      <Link
+                        to={`/habitats/${dino.habitat.toLowerCase().replace(' ', '-')}`}
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-900/50 to-emerald-900/50 border border-teal-400/50 rounded-lg hover:border-teal-300 transition-all duration-300 text-teal-300 hover:text-teal-100 backdrop-blur-sm hover:shadow-lg hover:shadow-teal-500/20 text-sm"
+                      >
+                        <span className="mr-2">🌍</span>
+                        <span>HABITAT: {dino.habitat.toUpperCase()}</span>
+                      </Link>
+                    </div>
+                  )}
                   {dino.game && dino.game !== "Base game" && (
                     <p className="text-green-400 text-sm">
                       <span className="text-green-500"></span> {dino.game.toUpperCase()}
@@ -290,8 +301,8 @@ const DinoDetailsPage = () => {
                   </h2>
                   <div className="space-y-3">
                     {[
-                      { label: "FAMILY", value: dino.family },
-                      { label: "GENUS", value: dino.genus },
+                      { label: "FAMILY", value: dino.family, link: true },
+                      { label: "GENUS", value: dino.genus, link: false },
                     ]
                       .filter((item) => item.value)
                       .map((item, idx) => (
@@ -300,9 +311,18 @@ const DinoDetailsPage = () => {
                           className="flex justify-between items-center p-3 bg-black/30 rounded-lg border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300"
                         >
                           <span className="text-emerald-200/80 font-mono text-sm">{item.label}:</span>
-                          <span className="text-emerald-100 font-semibold">
-                            {item.value}
-                          </span>
+                          {item.link && item.value ? (
+                            <Link
+                              to={`/families#${item.value.toLowerCase().replace(/\s+/g, '-')}`}
+                              className="text-emerald-100 font-semibold hover:text-emerald-300 transition-colors duration-300 cursor-pointer underline decoration-emerald-500/50 hover:decoration-emerald-400"
+                            >
+                              {item.value}
+                            </Link>
+                          ) : (
+                            <span className="text-emerald-100 font-semibold">
+                              {item.value}
+                            </span>
+                          )}
                         </div>
                       ))}
                   </div>
@@ -431,12 +451,13 @@ const DinoDetailsPage = () => {
                             <p className="text-xs text-orange-200/80 mb-2 font-mono">DIET TYPE:</p>
                             <div className="flex flex-wrap gap-2">
                               {dino.diet.map((item, index) => (
-                                <span
+                                <Link
                                   key={index}
-                                  className="px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm bg-red-500/20 text-red-300 border border-red-500/50 font-mono"
+                                  to={`/diets/${item.toLowerCase()}`}
+                                  className="px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm bg-red-500/20 text-red-300 border border-red-500/50 font-mono hover:bg-red-500/30 hover:border-red-400/70 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-pointer"
                                 >
                                   {item.toUpperCase()}
-                                </span>
+                                </Link>
                               ))}
                             </div>
                           </div>
@@ -507,12 +528,13 @@ const DinoDetailsPage = () => {
                   <div className="bg-black/20 p-4 rounded-lg border border-amber-500/20">
                     <div className="flex flex-wrap gap-2">
                       {dino.dig_sites.map((site, index) => (
-                        <span
+                        <Link
                           key={index}
-                          className="px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm bg-amber-500/20 text-amber-300 border border-amber-500/50 font-mono"
+                          to={`/dig-sites#${site.toLowerCase().replace(/\s+/g, '-')}`}
+                          className="px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm bg-amber-500/20 text-amber-300 border border-amber-500/50 font-mono hover:bg-amber-500/30 hover:border-amber-400/70 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-pointer"
                         >
                           {site.toUpperCase()}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                   </div>
