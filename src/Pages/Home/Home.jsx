@@ -184,6 +184,59 @@ const HomePage = () => {
               </p>
             </div>
           </div>
+
+          {/* API Attribution */}
+          <div className="text-center mt-8">
+            <p className="text-gray-500 text-xs font-mono">
+              Data provided by unofficial API:{" "}
+              <a 
+                href="https://jwe3-api.up.railway.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 transition-colors underline"
+              >
+                JWE3 API
+              </a>
+            </p>
+          </div>
+
+          {/* Developer Footer */}
+          <div className="text-center mt-12 pb-8">
+            <div className="inline-flex items-center gap-6 px-8 py-4 bg-gradient-to-r from-gray-900/50 to-black/50 border border-gray-500/30 rounded-lg backdrop-blur-sm">
+              <span className="text-gray-400 text-sm font-mono">Developed by Irene Alcaine</span>
+              <div className="flex items-center gap-4">
+                <a 
+                  href="https://irenealcainealvarez.es/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-cyan-400 transition-colors text-sm font-mono"
+                  title="Website"
+                >
+                  🌐 Web
+                </a>
+                <span className="text-gray-600">|</span>
+                <a 
+                  href="https://github.com/irenealcaine" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-cyan-400 transition-colors text-sm font-mono"
+                  title="GitHub"
+                >
+                  💻 GitHub
+                </a>
+                <span className="text-gray-600">|</span>
+                <a 
+                  href="https://www.linkedin.com/feed/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-cyan-400 transition-colors text-sm font-mono"
+                  title="LinkedIn"
+                >
+                  💼 LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
