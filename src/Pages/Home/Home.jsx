@@ -45,8 +45,8 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* Navigation Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Primary Navigation Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {/* Dinosaurs Card */}
             <Link to="/dinosaurs" className="group">
               <div className="relative h-full">
@@ -116,6 +116,59 @@ const HomePage = () => {
                   </p>
                   
                   <div className="mt-6 px-4 py-2 border border-orange-400/30 rounded-lg text-orange-300 text-xs font-mono group-hover:border-orange-400 group-hover:shadow-lg group-hover:shadow-orange-500/20 transition-all duration-300">
+                    ACCESS DATABASE →
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Secondary Navigation - Diets & Habitats */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Diets Card */}
+            <Link to="/diets" className="group">
+              <div className="relative h-full">
+                <div className="absolute -inset-1 bg-gradient-to-r from-rose-500/30 to-pink-500/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl p-6 rounded-2xl border border-rose-500/30 hover:border-rose-400/60 transition-all duration-300 h-full flex flex-col items-center justify-center">
+                  <div className="absolute top-4 left-4 w-3 h-3 bg-rose-400 rounded-full animate-pulse"></div>
+                  <div className="absolute top-4 right-4 w-3 h-3 bg-pink-400 rounded-full animate-pulse delay-200"></div>
+                  
+                  <div className="text-5xl mb-3">🍖</div>
+                  <h2 className="text-2xl font-black font-mono mb-2">
+                    <span className="bg-gradient-to-r from-rose-300 to-pink-300 bg-clip-text text-transparent">
+                      DIETS
+                    </span>
+                  </h2>
+                  <p className="text-gray-400 text-sm font-mono text-center">
+                    <span className="text-rose-400">&gt;</span> Browse by dietary type
+                  </p>
+                  
+                  <div className="mt-4 px-4 py-2 border border-rose-400/30 rounded-lg text-rose-300 text-xs font-mono group-hover:border-rose-400 group-hover:shadow-lg group-hover:shadow-rose-500/20 transition-all duration-300">
+                    ACCESS DATABASE →
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Habitats Card */}
+            <Link to="/habitats" className="group">
+              <div className="relative h-full">
+                <div className="absolute -inset-1 bg-gradient-to-r from-teal-500/30 to-emerald-500/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl p-6 rounded-2xl border border-teal-500/30 hover:border-teal-400/60 transition-all duration-300 h-full flex flex-col items-center justify-center">
+                  <div className="absolute top-4 left-4 w-3 h-3 bg-teal-400 rounded-full animate-pulse"></div>
+                  <div className="absolute top-4 right-4 w-3 h-3 bg-emerald-400 rounded-full animate-pulse delay-200"></div>
+                  
+                  <div className="text-5xl mb-3">🌍</div>
+                  <h2 className="text-2xl font-black font-mono mb-2">
+                    <span className="bg-gradient-to-r from-teal-300 to-emerald-300 bg-clip-text text-transparent">
+                      HABITATS
+                    </span>
+                  </h2>
+                  <p className="text-gray-400 text-sm font-mono text-center">
+                    <span className="text-teal-400">&gt;</span> Explore by environment
+                  </p>
+                  
+                  <div className="mt-4 px-4 py-2 border border-teal-400/30 rounded-lg text-teal-300 text-xs font-mono group-hover:border-teal-400 group-hover:shadow-lg group-hover:shadow-teal-500/20 transition-all duration-300">
                     ACCESS DATABASE →
                   </div>
                 </div>
