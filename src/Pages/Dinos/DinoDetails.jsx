@@ -205,7 +205,7 @@ const DinoDetailsPage = () => {
 
           {/* Hero HUD Panel */}
           <div className="relative mb-8">
-            <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border-2 border-cyan-500/30 rounded-2xl p-8 shadow-2xl shadow-cyan-500/10">
+            <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border-2 border-cyan-500/30 rounded-2xl p-4 pb-3 xl:p-8 shadow-2xl shadow-cyan-500/10">
               {/* Corner Accents */}
               <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-400 rounded-tl-2xl"></div>
               <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-400 rounded-tr-2xl"></div>
@@ -279,7 +279,7 @@ const DinoDetailsPage = () => {
             <div className="xl:col-span-6 space-y-6">
               {/* Classification HUD Panel */}
               {(dino.family || dino.genus || dino.territory) && (
-                <div className="relative bg-gradient-to-br from-emerald-900/30 to-green-900/30 backdrop-blur-xl p-6 rounded-xl border border-emerald-400/50 shadow-lg shadow-emerald-500/20">
+                <div className="relative bg-gradient-to-br from-emerald-900/30 to-green-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-emerald-400/50 shadow-lg shadow-emerald-500/20">
                   {/* HUD Corner Elements */}
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-emerald-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-emerald-400"></div>
@@ -311,7 +311,7 @@ const DinoDetailsPage = () => {
 
               {/* Description Data Panel */}
               {dino.description && (
-                <div className="relative bg-gradient-to-br from-blue-900/30 to-indigo-900/30 backdrop-blur-xl p-6 rounded-xl border border-blue-400/50 shadow-lg shadow-blue-500/20">
+                <div className="relative bg-gradient-to-br from-blue-900/30 to-indigo-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-blue-400/50 shadow-lg shadow-blue-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-blue-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-blue-400"></div>
 
@@ -320,7 +320,7 @@ const DinoDetailsPage = () => {
                     <span className="text-blue-300">[</span>DESCRIPTION<span className="text-blue-300">]</span>
                   </h2>
                   <div className="bg-black/20 p-4 rounded-lg border border-blue-500/20">
-                    <p className="text-gray-200 leading-relaxed text-xl font-light">
+                    <p className="text-gray-200 leading-relaxed text-md xl:text-xl font-light">
                       {dino.description}
                     </p>
                   </div>
@@ -329,7 +329,7 @@ const DinoDetailsPage = () => {
 
               {/* Discovery HUD Panel */}
               {dino.discovery && (
-                <div className="relative bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-xl p-6 rounded-xl border border-green-400/50 shadow-lg shadow-green-500/20">
+                <div className="relative bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-green-400/50 shadow-lg shadow-green-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-green-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-green-400"></div>
 
@@ -338,7 +338,7 @@ const DinoDetailsPage = () => {
                     <span className="text-green-300">[</span>DISCOVERY LOG<span className="text-green-300">]</span>
                   </h2>
                   <div className="bg-black/20 p-4 rounded-lg border border-green-500/20">
-                    <p className="text-gray-200 leading-relaxed text-lg font-light">
+                    <p className="text-gray-200 leading-relaxed text-sm xl:text-lg font-light">
                       {dino.discovery}
                     </p>
                   </div>
@@ -347,7 +347,7 @@ const DinoDetailsPage = () => {
 
               {/* Palaeoecology HUD Panel */}
               {dino.palaeoecology && (
-                <div className="relative bg-gradient-to-br from-indigo-900/30 to-purple-900/30 backdrop-blur-xl p-6 rounded-xl border border-indigo-400/50 shadow-lg shadow-indigo-500/20">
+                <div className="relative bg-gradient-to-br from-indigo-900/30 to-purple-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-indigo-400/50 shadow-lg shadow-indigo-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-indigo-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-indigo-400"></div>
 
@@ -356,7 +356,7 @@ const DinoDetailsPage = () => {
                     <span className="text-indigo-300">[</span>PALEO-ECOLOGY<span className="text-indigo-300">]</span>
                   </h2>
                   <div className="bg-black/20 p-4 rounded-lg border border-indigo-500/20">
-                    <p className="text-gray-200 leading-relaxed text-lg font-light">
+                    <p className="text-gray-200 leading-relaxed text-sm xl:text-lg font-light">
                       {dino.palaeoecology}
                     </p>
                   </div>
@@ -369,7 +369,7 @@ const DinoDetailsPage = () => {
 
               {/* Stats HUD Panel */}
               {(dino.height || dino.length || dino.weight) && (
-                <div className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-xl p-6 rounded-xl border border-purple-400/50 shadow-lg shadow-purple-500/20">
+                <div className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-purple-400/50 shadow-lg shadow-purple-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-purple-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-purple-400"></div>
 
@@ -414,7 +414,7 @@ const DinoDetailsPage = () => {
                 const foodReqs = getFoodRequirement(dino);
                 const hasFoodInfo = foodReqs || (dino.diet && dino.diet.length > 0) || (dino.feeder && dino.feeder.length > 0);
                 return hasFoodInfo && (
-                  <div className="relative bg-gradient-to-br from-orange-900/30 to-red-900/30 backdrop-blur-xl p-6 rounded-xl border border-orange-400/50 shadow-lg shadow-orange-500/20">
+                  <div className="relative bg-gradient-to-br from-orange-900/30 to-red-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-orange-400/50 shadow-lg shadow-orange-500/20">
                     <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-orange-400"></div>
                     <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-orange-400"></div>
 
@@ -496,7 +496,7 @@ const DinoDetailsPage = () => {
 
               {/* Dig Sites HUD Panel */}
               {dino.dig_sites && dino.dig_sites.length > 0 && (
-                <div className="relative bg-gradient-to-br from-amber-900/30 to-orange-900/30 backdrop-blur-xl p-6 rounded-xl border border-amber-400/50 shadow-lg shadow-amber-500/20">
+                <div className="relative bg-gradient-to-br from-amber-900/30 to-orange-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-amber-400/50 shadow-lg shadow-amber-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-amber-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-amber-400"></div>
 
@@ -520,7 +520,7 @@ const DinoDetailsPage = () => {
               )}
               {/* Environmental Requirements HUD Panel */}
               {dino.environment && dino.environment.length > 0 && (
-                <div className="relative bg-gradient-to-br from-teal-900/30 to-cyan-900/30 backdrop-blur-xl p-6 rounded-xl border border-teal-400/50 shadow-lg shadow-teal-500/20">
+                <div className="relative bg-gradient-to-br from-teal-900/30 to-cyan-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-teal-400/50 shadow-lg shadow-teal-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-teal-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-teal-400"></div>
 
@@ -536,7 +536,7 @@ const DinoDetailsPage = () => {
 
               {/* Cohabitation HUD Panel */}
               {dino.cohabitation && dino.cohabitation.length > 0 && (
-                <div className="relative bg-gradient-to-br from-rose-900/30 to-pink-900/30 backdrop-blur-xl p-6 rounded-xl border border-rose-400/50 shadow-lg shadow-rose-500/20">
+                <div className="relative bg-gradient-to-br from-rose-900/30 to-pink-900/30 backdrop-blur-xl p-4 xl:p-6 rounded-xl border border-rose-400/50 shadow-lg shadow-rose-500/20">
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-rose-400"></div>
                   <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-rose-400"></div>
 
