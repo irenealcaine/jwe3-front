@@ -22,14 +22,14 @@ const HomePage = () => {
           <div className="text-center mb-16">
             <div className="relative inline-block">
               {/* Header HUD Frame */}
-              <div className="absolute -inset-4 border-2 border-cyan-400/30 rounded-2xl">
+              <div className="absolute -inset-2 md:-inset-4 border-2 border-cyan-400/30 rounded-2xl">
                 <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-cyan-400 rounded-tl-2xl"></div>
                 <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-cyan-400 rounded-tr-2xl"></div>
                 <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-cyan-400 rounded-bl-2xl"></div>
                 <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-cyan-400 rounded-br-2xl"></div>
               </div>
 
-              <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl p-8 rounded-2xl border border-cyan-500/20">
+              <div className="bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl p-8  rounded-2xl border border-cyan-500/20">
                 <span className="inline-block px-4 py-2 bg-cyan-500/20 border border-cyan-400/50 rounded-full text-cyan-300 text-sm font-mono mb-6">
                   MAIN DATABASE
                 </span>
@@ -176,14 +176,6 @@ const HomePage = () => {
             </Link>
           </div>
 
-          {/* Footer Info */}
-          <div className="text-center mt-16">
-            <div className="inline-block px-6 py-3 bg-gradient-to-r from-gray-900/50 to-black/50 border border-gray-500/30 rounded-lg backdrop-blur-sm">
-              <p className="text-gray-400 text-xs font-mono">
-                <span className="text-green-400">●</span> SYSTEM ONLINE <span className="text-gray-600">|</span> DATABASE v3.0
-              </p>
-            </div>
-          </div>
 
           {/* API Attribution */}
           <div className="text-center mt-8">
@@ -202,9 +194,9 @@ const HomePage = () => {
 
           {/* Developer Footer */}
           <div className="text-center mt-12 pb-8">
-            <div className="inline-flex items-center gap-6 px-8 py-4 bg-gradient-to-r from-gray-900/50 to-black/50 border border-gray-500/30 rounded-lg backdrop-blur-sm">
+            <div className="inline-flex flex-col xl:flex-row items-center gap-4 xl:gap-8 px-4 py-2 bg-gradient-to-r from-gray-900/50 to-black/50 border border-gray-500/30 rounded-lg backdrop-blur-sm">
               <span className="text-gray-400 text-sm font-mono">Developed by Irene Alcaine</span>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <a 
                   href="https://irenealcainealvarez.es/" 
                   target="_blank" 
@@ -212,7 +204,7 @@ const HomePage = () => {
                   className="text-gray-400 hover:text-cyan-400 transition-colors text-sm font-mono"
                   title="Website"
                 >
-                  🌐 Web
+                  Web
                 </a>
                 <span className="text-gray-600">|</span>
                 <a 
@@ -222,7 +214,7 @@ const HomePage = () => {
                   className="text-gray-400 hover:text-cyan-400 transition-colors text-sm font-mono"
                   title="GitHub"
                 >
-                  💻 GitHub
+                  GitHub
                 </a>
                 <span className="text-gray-600">|</span>
                 <a 
@@ -232,7 +224,7 @@ const HomePage = () => {
                   className="text-gray-400 hover:text-cyan-400 transition-colors text-sm font-mono"
                   title="LinkedIn"
                 >
-                  💼 LinkedIn
+                  LinkedIn
                 </a>
               </div>
             </div>
