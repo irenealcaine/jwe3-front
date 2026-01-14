@@ -1,6 +1,6 @@
 {
-  "name": "JWE3 Dinosaurs",
-  "short_name": "JWE3 Dinos",
+  "name": "JWE3 Database",
+  "short_name": "JWE3 Database",
   "description": "Discover the magnificent dinosaurs from Jurassic World Evolution 3",
   "start_url": "/",
   "display": "standalone",
@@ -12,33 +12,33 @@
   "categories": ["education", "games", "entertainment"],
   "icons": [
     {
-      "src": "/dino-icon.svg",
+      "src": "/jwe3.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon-16x16.png",
+      "src": "/jwe3.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "/favicon-32x32.png",
+      "src": "/jwe3.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/jwe3.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/jwe3.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/jwe3.png",
       "sizes": "512x512",
       "type": "image/png"
     }
