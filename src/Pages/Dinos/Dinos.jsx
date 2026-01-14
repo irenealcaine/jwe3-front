@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 const DinosPage = () => {
   const [dinos, setDinos] = useState([]);
+  const [filteredDinos, setFilteredDinos] = useState([]);
+  const [nameFilter, setNameFilter] = useState("");
+  const [eraFilter, setEraFilter] = useState("");
+  const [eras, setEras] = useState([]);
 
   useEffect(() => {
     async function fetchDinos() {
@@ -11,9 +15,31 @@ const DinosPage = () => {
       // Sort dinosaurs alphabetically by name
       const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
       setDinos(sortedData);
+      setFilteredDinos(sortedData);
+      
+      // Extract unique eras
+      const uniqueEras = [...new Set(sortedData.map(dino => dino.era).filter(Boolean))];
+      setEras(uniqueEras.sort());
     }
     fetchDinos();
   }, []);
+
+  // Apply filters
+  useEffect(() => {
+    let filtered = dinos;
+
+    if (nameFilter) {
+      filtered = filtered.filter(dino =>
+        dino.name.toLowerCase().includes(nameFilter.toLowerCase())
+      );
+    }
+
+    if (eraFilter) {
+      filtered = filtered.filter(dino => dino.era === eraFilter);
+    }
+
+    setFilteredDinos(filtered);
+  }, [nameFilter, eraFilter, dinos]);
 
   return (
     <div className="bg-black min-h-screen text-white relative overflow-hidden">
@@ -71,8 +97,71 @@ const DinosPage = () => {
             </div>
           </div>
 
+          {/* Filters Section */}
+          <div className="mb-8 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl p-6 rounded-xl border border-cyan-500/30">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Name Filter */}
+                <div className="relative">
+                  <label className="block text-cyan-300 text-sm font-mono mb-2">
+                    <span className="text-cyan-400">&gt;</span> FILTER BY NAME
+                  </label>
+                  <input
+                    type="text"
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
+                    placeholder="Search dinosaur..."
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono"
+                  />
+                </div>
+
+                {/* Era Filter */}
+                <div className="relative">
+                  <label className="block text-cyan-300 text-sm font-mono mb-2">
+                    <span className="text-cyan-400">&gt;</span> FILTER BY ERA
+                  </label>
+                  <select
+                    value={eraFilter}
+                    onChange={(e) => setEraFilter(e.target.value)}
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-mono appearance-none cursor-pointer"
+                  >
+                    <option value="">All eras</option>
+                    {eras.map((era, index) => (
+                      <option key={index} value={era}>
+                        {era}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Active Filters Display */}
+              {(nameFilter || eraFilter) && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="text-cyan-400 text-sm font-mono">Active filters:</span>
+                  {nameFilter && (
+                    <button
+                      onClick={() => setNameFilter("")}
+                      className="px-3 py-1 bg-cyan-900/50 text-cyan-200 rounded-full text-xs font-mono border border-cyan-400/50 hover:bg-cyan-800/50 transition-all"
+                    >
+                      Name: {nameFilter} ✕
+                    </button>
+                  )}
+                  {eraFilter && (
+                    <button
+                      onClick={() => setEraFilter("")}
+                      className="px-3 py-1 bg-purple-900/50 text-purple-200 rounded-full text-xs font-mono border border-purple-400/50 hover:bg-purple-800/50 transition-all"
+                    >
+                      Era: {eraFilter} ✕
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* HUD Loading State */}
-          {dinos.length === 0 && (
+          {filteredDinos.length === 0 && dinos.length === 0 && (
             <div className="text-center">
               <div className="relative inline-block">
                 <div className="w-16 h-16 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
@@ -85,9 +174,24 @@ const DinosPage = () => {
             </div>
           )}
 
+          {/* No results message */}
+          {filteredDinos.length === 0 && dinos.length > 0 && (
+            <div className="text-center py-16">
+              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl p-8 rounded-xl border border-cyan-500/30 max-w-md mx-auto">
+                <div className="text-6xl mb-4">🦕</div>
+                <p className="text-cyan-300 font-mono text-lg mb-2">
+                  <span className="text-cyan-400">[</span>NO RESULTS FOUND<span className="text-cyan-400">]</span>
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Try adjusting the search filters
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* HUD Specimen Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {dinos.map((dino) => (
+            {filteredDinos.map((dino) => (
               <Link
                 key={dino.id}
                 to={`/dinosaurs/${dino.slug}`}
@@ -160,8 +264,8 @@ const DinosPage = () => {
                 <p className="text-cyan-300 font-mono flex items-center gap-3">
                   <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                   <span className="text-cyan-400">[</span>DATABASE STATUS<span className="text-cyan-400">]</span>
-                  <span className="text-white font-bold">{dinos.length}</span>
-                  <span className="text-gray-300">specimens loaded</span>
+                  <span className="text-white font-bold">{filteredDinos.length}</span>
+                  <span className="text-gray-300">of {dinos.length} specimens</span>
                 </p>
               </div>
             </div>
