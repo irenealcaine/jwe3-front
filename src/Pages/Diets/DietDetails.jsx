@@ -107,6 +107,11 @@ const DietDetailsPage = () => {
                       [{dietData.name.toUpperCase()}]
                     </span>
                   </h1>
+                  {dietData.description && (
+                    <p className="text-base text-gray-300 max-w-3xl mx-auto mb-4 font-mono">
+                      {dietData.description}
+                    </p>
+                  )}
                   <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
                     <span className={colors.accent}>&gt;</span> {dietData.dinosaurs.length} species with this dietary classification
                   </p>

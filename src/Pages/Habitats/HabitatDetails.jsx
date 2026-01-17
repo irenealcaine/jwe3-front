@@ -111,6 +111,11 @@ const HabitatDetailsPage = () => {
                       [{habitatData.name.toUpperCase()}]
                     </span>
                   </h1>
+                  {habitatData.description && (
+                    <p className="text-base text-gray-300 max-w-3xl mx-auto mb-4 font-mono">
+                      {habitatData.description}
+                    </p>
+                  )}
                   <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
                     <span className={colors.accent}>&gt;</span> {habitatData.dinosaurs.length} species in this habitat
                   </p>
