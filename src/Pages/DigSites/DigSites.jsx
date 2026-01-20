@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const DigSitesPage = () => {
   const [sites, setSites] = useState([]);
+  const [sitesByZone, setSitesByZone] = useState({});
 
   useEffect(() => {
     async function fetchSites() {
@@ -10,8 +11,18 @@ const DigSitesPage = () => {
       const data = await res.json();
       const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
       setSites(sortedData);
-    //   console.log(sortedData);
-      // setSites(data);
+      
+      // Agrupar por zona
+      const grouped = sortedData.reduce((acc, site) => {
+        const zone = site.zone || "Unknown Zone";
+        if (!acc[zone]) {
+          acc[zone] = [];
+        }
+        acc[zone].push(site);
+        return acc;
+      }, {});
+      
+      setSitesByZone(grouped);
     }
     fetchSites();
   }, []);
@@ -102,58 +113,73 @@ const DigSitesPage = () => {
 
           {/* Family Sections */}
           <div className="space-y-12">
-            {sites.map((site) => (
-              <div key={site.name} id={site.name.toLowerCase().replace(/\s+/g, '-')} className="relative scroll-mt-24">
-                {/* Family Header */}
-                <div className="mb-6">
+            {Object.keys(sitesByZone).sort().map((zone) => (
+              <div key={zone} className="space-y-8">
+                {/* Zone Header */}
+                <div className="mb-8">
                   <div className="relative inline-block">
                     <div className="absolute -inset-2 border border-purple-400/30 rounded-lg"></div>
                     <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 backdrop-blur-xl px-6 py-3 rounded-lg border border-purple-500/50">
-                      <h2 className="text-2xl md:text-3xl font-black font-mono">
+                      <h2 className="text-3xl md:text-4xl font-black font-mono">
                         <span className="text-purple-400">&gt; </span>
                         <span className="bg-gradient-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent">
-                          {site.name}
+                          {zone}
                         </span>
                       </h2>
                     </div>
                   </div>
                 </div>
 
-                {/* Dinosaurs Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {site.dinosaurs.map((dinosaur) => (
-                    <Link
-                      key={dinosaur.slug}
-                      to={`/dinosaurs/${dinosaur.slug}`}
-                      className="group relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl rounded-xl overflow-hidden transition-all duration-300 transform hover:scale-105 border border-gray-700/50 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20"
-                    >
-                      {/* HUD Corner Elements */}
-                      <div className="absolute top-1 left-1 w-3 h-3 border-t border-l border-cyan-400/60 rounded-tl-lg z-10"></div>
-                      <div className="absolute top-1 right-1 w-3 h-3 border-t border-r border-cyan-400/60 rounded-tr-lg z-10"></div>
-                      <div className="absolute bottom-1 left-1 w-3 h-3 border-b border-l border-cyan-400/60 rounded-bl-lg z-10"></div>
-                      <div className="absolute bottom-1 right-1 w-3 h-3 border-b border-r border-cyan-400/60 rounded-br-lg z-10"></div>
-
-                      {/* Image Container */}
-                      <div className="relative overflow-hidden bg-gray-800/50">
-                        <img
-                          src={`https://jwe3-api.up.railway.app${dinosaur.image}`}
-                          alt={dinosaur.name}
-                          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300 filter brightness-110 contrast-110"
-                        />
-
-                        {/* Holographic overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/5 to-transparent group-hover:animate-pulse"></div>
-                      </div>
-
-                      {/* Content Panel */}
-                      <div className="p-4 bg-black/30">
-                        <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-300 transition-colors font-mono">
-                          <span className="text-cyan-400/60">&gt; </span>
-                          {dinosaur.name}
+                {/* Sites in this Zone */}
+                <div className="space-y-8">
+                  {sitesByZone[zone].map((site) => (
+                    <div key={site.name} id={site.name.toLowerCase().replace(/\s+/g, '-')} className="relative scroll-mt-24">
+                      {/* Site Header */}
+                      <div className="mb-6">
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-200 font-mono pl-4 border-l-4 border-cyan-400/50">
+                          <span className="text-cyan-400">&gt; </span>
+                          {site.name}
                         </h3>
                       </div>
-                    </Link>
+
+                      {/* Dinosaurs Grid */}
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                        {site.dinosaurs.map((dinosaur) => (
+                          <Link
+                            key={dinosaur.slug}
+                            to={`/dinosaurs/${dinosaur.slug}`}
+                            className="group relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl rounded-xl overflow-hidden transition-all duration-300 transform hover:scale-105 border border-gray-700/50 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20"
+                          >
+                            {/* HUD Corner Elements */}
+                            <div className="absolute top-1 left-1 w-3 h-3 border-t border-l border-cyan-400/60 rounded-tl-lg z-10"></div>
+                            <div className="absolute top-1 right-1 w-3 h-3 border-t border-r border-cyan-400/60 rounded-tr-lg z-10"></div>
+                            <div className="absolute bottom-1 left-1 w-3 h-3 border-b border-l border-cyan-400/60 rounded-bl-lg z-10"></div>
+                            <div className="absolute bottom-1 right-1 w-3 h-3 border-b border-r border-cyan-400/60 rounded-br-lg z-10"></div>
+
+                            {/* Image Container */}
+                            <div className="relative overflow-hidden bg-gray-800/50">
+                              <img
+                                src={`https://jwe3-api.up.railway.app${dinosaur.image}`}
+                                alt={dinosaur.name}
+                                className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300 filter brightness-110 contrast-110"
+                              />
+
+                              {/* Holographic overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent"></div>
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/5 to-transparent group-hover:animate-pulse"></div>
+                            </div>
+
+                            {/* Content Panel */}
+                            <div className="p-4 bg-black/30">
+                              <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-300 transition-colors font-mono">
+                                <span className="text-cyan-400/60">&gt; </span>
+                                {dinosaur.name}
+                              </h3>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -161,7 +187,7 @@ const DigSitesPage = () => {
           </div>
 
           {/* HUD Footer Stats */}
-          {Object.keys(sites).length > 0 && (
+          {Object.keys(sitesByZone).length > 0 && (
             <div className="text-center mt-16">
               <div className="inline-block bg-gradient-to-r from-gray-900/80 to-black/80 backdrop-blur-xl px-8 py-4 rounded-xl border border-cyan-500/30">
                 <p className="text-cyan-300 font-mono flex items-center gap-3">
@@ -169,7 +195,12 @@ const DigSitesPage = () => {
                   <span className="text-cyan-400">[</span>DATABASE STATUS
                   <span className="text-cyan-400">]</span>
                   <span className="text-white font-bold">
-                    {Object.keys(sites).length}
+                    {Object.keys(sitesByZone).length}
+                  </span>
+                  <span className="text-gray-300">zones</span>
+                  <span className="text-cyan-400">•</span>
+                  <span className="text-white font-bold">
+                    {sites.length}
                   </span>
                   <span className="text-gray-300">sites loaded</span>
                 </p>
