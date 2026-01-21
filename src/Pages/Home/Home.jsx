@@ -29,16 +29,19 @@ const HomePage = () => {
               <div className="relative">
 
 
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 relative">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 relative">
                   <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-2xl font-mono tracking-tight">
-                    JURASSIC WORLD
+                    WELCOME TO
                   </span>
                   <br />
                   <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent drop-shadow-2xl font-mono tracking-tight">
-                    EVOLUTION 3
+                    JURASSIC WORLD EVOLUTION 3
                   </span>
                 </h1>
 
+                <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                  Build your own Jurassic World. Manage your park, bioengineer dinosaurs, and face the challenges of running a prehistoric zoo.
+                </p>
                 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
